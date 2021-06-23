@@ -1,16 +1,19 @@
+import database.Database;
+import database.Table;
+import models.Menu;
+import models.RestaurantUser;
+import java.awt.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 public class Server {
-    static Map<String, ClientHandler> users;
 
     public static void main(String[] args) throws IOException {
-        ServerSocket ss = new ServerSocket(207);
-        users = new ConcurrentHashMap<>();
-        Database.getInstance().add("restaurantRegister",new Table("E:\\class online\\term 2\\barnamenevisi pishrafte\\SnapFood\\data_storage\\restaurant_register.txt"));
+        ServerSocket ss = new ServerSocket(208);
+        Database.getInstance().add("restaurantRegister",new Table(RestaurantUser.file));
+        Database.getInstance().add("menu",new Table(Menu.menuFile));
         try {
             while (true) {
                 Socket socket = ss.accept();
